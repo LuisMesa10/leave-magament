@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Datos y credenciales locales
+data/
+.env
+*.log
+smoke-request-id.txt

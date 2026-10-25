@@ -16,3 +16,25 @@ jobs:
           cache: maven
       - name: Build and integration tests
         run: mvn --batch-mode --no-transfer-progress verify
+  docker:
+    runs-on: ubuntu-latest
+    env:
+      # Solo credenciales sinteticas para este contenedor efimero de CI.
+      LEAVE_EMPLOYEE_PASSWORD: ci-employee-smoke-password
+      LEAVE_MANAGER_PASSWORD: ci-manager-smoke-password
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and start local container
+        run: docker compose up --build -d
+      - name: Create a synthetic request
+        run: python3 scripts/docker_smoke.py seed
+      - name: Restart container and verify persistence and decisions
+        run: |
+          docker compose restart
+          python3 scripts/docker_smoke.py verify
+      - name: Show container logs on failure
+        if: failure()
+        run: docker compose logs
+      - name: Remove ephemeral containers and volumes
+        if: always()
+        run: docker compose down --volumes

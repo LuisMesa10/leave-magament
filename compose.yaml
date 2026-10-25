@@ -1,0 +1,13 @@
+services:
+  api:
+    build: .
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      LEAVE_EMPLOYEE_PASSWORD: ${LEAVE_EMPLOYEE_PASSWORD:?Configure LEAVE_EMPLOYEE_PASSWORD}
+      LEAVE_MANAGER_PASSWORD: ${LEAVE_MANAGER_PASSWORD:?Configure LEAVE_MANAGER_PASSWORD}
+    volumes:
+      - leave-data:/app/data
+volumes:
+  leave-data:
