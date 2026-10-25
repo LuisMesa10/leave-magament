@@ -38,9 +38,9 @@ flowchart TD
 
 ## Decisiones y limites
 
-HTTP Basic sirve para una demostracion con clientes API; las claves se codifican
+La API utiliza HTTP Basic para autenticar clientes; las claves se codifican
 con BCrypt en memoria y se inyectan por entorno, nunca se incluyen en Git.
-Dos cuentas fijas permiten demostrar roles sin introducir un subsistema completo de usuarios.
+La configuracion inicial define dos cuentas en memoria, una por rol.
 No se habilita CORS ni se ofrece un login web. Una futura interfaz de navegador
 necesitaria elegir explicitamente un esquema de sesion y proteccion CSRF apropiados.
 
@@ -48,7 +48,6 @@ Las entidades tienen version y los DTOs impiden que el cliente asigne propietari
 ID, estado o fechas de auditoria. Las modificaciones y su evento son atomicas.
 
 H2 en memoria hace reproducibles las pruebas. El perfil local permite persistir una
-demostracion nueva; ddl-auto=update no sustituye migraciones ni soporta automaticamente
-los datos del prototipo anterior, cuyo modelo no tenia propietario, fechas ni motivo.
+base local; ddl-auto=update no sustituye las migraciones versionadas de esquema.
 
-No se agregaron microservicios: este dominio y escala se explican mejor con un monolito.
+La aplicacion se organiza como un monolito con responsabilidades separadas por capas.

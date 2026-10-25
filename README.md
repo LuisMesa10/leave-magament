@@ -1,11 +1,10 @@
 # Leave Management API
 
-API de portafolio para gestionar solicitudes de permisos: empleado, supervisor,
+API REST para gestionar solicitudes de permisos: empleado, supervisor,
 estados, fechas, consulta paginada y trazabilidad. Java 17 y Spring Boot 3.5.
 
-## Que demuestra
+## Funcionalidades
 
-- Ciclo de desarrollo de software documentado mediante requisitos, reglas, contrato y pruebas.
 - Arquitectura en capas y Spring MVC para una API REST, con DTOs de entrada y salida.
 - Spring Security: autenticacion HTTP Basic, BCrypt y autorizacion por rol y propietario.
 - Spring Data JPA, relaciones entre entidades, transacciones y bloqueo optimista.
@@ -14,7 +13,6 @@ estados, fechas, consulta paginada y trazabilidad. Java 17 y Spring Boot 3.5.
 - CI con Java 17 y empaquetado Docker.
 
 No hay vistas HTML ni interfaz web: Spring MVC trabaja aqui con controladores REST.
-No se implementa Directorio Activo, JWT ni microservicios.
 
 ## Inicio rapido
 
@@ -42,7 +40,7 @@ En Windows, si PowerShell interpreta el argumento, use
 El perfil local guarda H2 en `data/`, excluido de Git.
 La consola H2 permanece deshabilitada.
 
-## Recorrido de demostracion
+## Flujo de uso
 
 1. El empleado crea una solicitud: ID, propietario, estado y fecha los asigna el servidor.
 2. Consulta sus solicitudes, filtra por tipo/estado/periodo y revisa el detalle.
@@ -73,7 +71,6 @@ si su version de la consola modifica las comillas de argumentos.
 
 - [Contrato HTTP, ejemplos y errores](docs/api.md)
 - [Arquitectura, reglas y decisiones](docs/architecture.md)
-- [Uso responsable de agentes de IA](docs/ai-development.md)
 
 ## Pruebas
 
@@ -101,17 +98,9 @@ Compose exige ambas variables, limita la exposicion a localhost y conserva H2
 en un volumen. `docker compose down` conserva ese volumen.
 El contenedor ejecuta la aplicacion con un usuario sin privilegios.
 
-## Cambios respecto a la primera API
+## Alcance y limitaciones
 
-Esta version cambia el contrato deliberadamente:
-GET de lista devuelve una pagina; POST exige tipo, fechas y motivo;
-las decisiones usan POST con comentario; la exportacion pasa a CSV;
-se sustituye DELETE por cancelacion con historial; todos los endpoints requieren credenciales.
-Consulte `docs/api.md` antes de adaptar un consumidor.
-
-## Limites reales
-
-Es una demostracion, con dos usuarios en memoria. No incluye registro de usuarios,
+La configuracion inicial utiliza dos usuarios en memoria. No incluye registro de usuarios,
 recuperacion de claves, multiples supervisores, permisos por departamento ni balance de vacaciones.
 El nombre visible lo proporciona el empleado; su identidad se vincula al usuario autenticado.
 No calcula dias habiles, festivos ni reglas laborales. Los dias mostrados son calendario,
@@ -119,10 +108,3 @@ incluyendo inicio y fin. Se permiten solicitudes superpuestas; no existe control
 El perfil local usa actualizacion automatica de esquema solo para demostraciones:
 no migra datos de versiones anteriores. Para produccion harian falta una base administrada,
 migraciones versionadas, gestion corporativa de usuarios, operacion y revision de seguridad.
-La autenticacion corporativa de los proyectos laborales no se atribuye a este proyecto.
-
-## Como presentarlo en una hoja de vida
-
-API REST de gestion de permisos con Java y Spring Boot, arquitectura en capas sobre
-Spring MVC, autenticacion y roles con Spring Security, persistencia JPA,
-trazabilidad de decisiones, consultas paginadas y pruebas de integracion.
