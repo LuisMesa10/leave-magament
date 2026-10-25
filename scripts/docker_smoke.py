@@ -27,7 +27,7 @@ def ready():
         try:
             call("/summary", role="manager")
             return
-        except (URLError, TimeoutError):
+        except (URLError, TimeoutError, ConnectionError):
             time.sleep(2)
     raise RuntimeError("El contenedor no quedo disponible en 60 segundos")
 
