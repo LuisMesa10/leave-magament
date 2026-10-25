@@ -52,9 +52,4 @@ Pruebas de integracion con MockMvc, contexto Spring y H2 real: validacion,
 proteccion del ID, creacion, transiciones, 404, eliminacion y descarga.
 GitHub Actions ejecuta `mvn verify` con Java 17.
 
-## Alcance y limitaciones
 
-Proyecto de portafolio en desarrollo. H2 esta en memoria: los datos se pierden al reiniciar.
-La consola H2 esta deshabilitada. No incluye autenticacion, autorizacion, integracion con
-Directorio Activo, paginacion ni interfaz web. No debe exponerse con datos reales.
-No implementa microservicios. Docker es una posible mejora futura, no una funcion existente.
