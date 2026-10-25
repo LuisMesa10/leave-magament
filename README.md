@@ -98,13 +98,7 @@ Compose exige ambas variables, limita la exposicion a localhost y conserva H2
 en un volumen. `docker compose down` conserva ese volumen.
 El contenedor ejecuta la aplicacion con un usuario sin privilegios.
 
-## Alcance y limitaciones
 
-La configuracion inicial utiliza dos usuarios en memoria. No incluye registro de usuarios,
-recuperacion de claves, multiples supervisores, permisos por departamento ni balance de vacaciones.
-El nombre visible lo proporciona el empleado; su identidad se vincula al usuario autenticado.
-No calcula dias habiles, festivos ni reglas laborales. Los dias mostrados son calendario,
-incluyendo inicio y fin. Se permiten solicitudes superpuestas; no existe control de capacidad.
 El perfil local usa actualizacion automatica de esquema solo para demostraciones:
 no migra datos de versiones anteriores. Para produccion harian falta una base administrada,
 migraciones versionadas, gestion corporativa de usuarios, operacion y revision de seguridad.
