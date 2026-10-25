@@ -13,14 +13,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
     @Bean
+    BCryptPasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
+    @Bean
     UserDetailsService users(@Value("${app.employee-password}") String employeePassword,
-                             @Value("${app.manager-password}") String managerPassword) {
+                             @Value("${app.manager-password}") String managerPassword,
+                             BCryptPasswordEncoder encoder) {
         if (employeePassword.isBlank() || managerPassword.isBlank()
                 || employeePassword.length() < 12 || managerPassword.length() < 12
                 || employeePassword.equals(managerPassword)) {
             throw new IllegalArgumentException("Configure dos claves distintas de al menos 12 caracteres");
         }
-        var encoder = new BCryptPasswordEncoder();
         return new InMemoryUserDetailsManager(
             User.withUsername("employee").password(encoder.encode(employeePassword)).roles("EMPLOYEE").build(),
             User.withUsername("manager").password(encoder.encode(managerPassword)).roles("MANAGER").build());
